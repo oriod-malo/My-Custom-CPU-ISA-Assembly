@@ -17,47 +17,6 @@ module core(
 
 );
 
-//defparam width_instruction = 32;
-//defparam width_opcode = 8;
-//defparam width_data = 32;
-//defparam width_address = 8;
-//defparam pc_address = 'b00000000;
-//defparam ra_address = 'b11111111;
-//defparam base_address = 'b00000001;
-//defparam ANDR = 'b00000101;
-//defparam ORR = 'b00000110;
-//defparam XORR = 'b00000111;
-//defparam ADDR = 'b00001000;
-//defparam SUBR = 'b00001001;
-//defparam MPLR = 'b00001010;
-//defparam DIVR = 'b00001011;
-
-//defparam JP = 'b00000001;
-//defparam JAL = 'b00000011;
-
-// defparam LOADI = 'b10000001;
-// defparam LOADR = 'b10000010;
-// defparam STORE = 'b10000011;
-
-// ----------------------- Type I Instructions -------------------------//
-
-// BEQR	= 8'b0100_0001,
-// BNER	= 8'b0100_0010,
-// BEQI	= 8'b0100_0011,
-// BNEI	= 8'b0100_0100,
-
-// SLLI = 8'b0100_1000,
-// SRLI = 8'b0100_1001,
-
-// ANDI	= 8'b0100_0101,
-// ORI	= 8'b0100_0110,
-// XORI = 8'b0100_0111,
-
-// ADDI = 8'b0100_1010,
-// SUBI = 8'b0100_1011,
-// MPLI = 8'b0100_1100,
-// DIVI = 8'b0100_1101
-
 wire [7:0] opcode;
 reg [31:0] tempData;
 reg [31:0] tempPC = 'b0000000000000000_0000000000000000;
@@ -159,14 +118,13 @@ case(instr[31:24])
 			intData <= instr[7:0];
 			data_rd = data_rs1<<intData;
 		end		
-		'b0100_1001: begin // SLLI Rd, RS1, K | Rd <= Rd >> K
+		'b0100_1001: begin // SRLI Rd, RS1, K | Rd <= Rd >> K
 			addr_rd <= instr[23:16];
 			addr_rs1 <= instr[15:8];
 			intData <= instr[7:0];
 			data_rd = data_rs1>>intData;
 		end
 		
-		// JUMP INSTRUCTIONS (J FORMAT)
 		'b00000001: begin // JP
 			tempPC[31:0] = 'b00000000 +  instr[23:0];
 			$display($time,"\t Jumping to address: %b", {8'b0000_0000,instr[23:0]});
@@ -179,7 +137,6 @@ case(instr[31:24])
 			$display($time,"\t Jumping to address: %b", {8'b0000_0000,instr[23:0]});
 		end
 		
-		// Branch Instructions
 		'b0100_0001: begin				// BEQR	= 8'b0100_0001,
 			addr_rs1 = instr[23:16];
 			addr_rs2 = instr[15:8];
@@ -246,13 +203,6 @@ case(instr[31:24])
 				$display($time,"\t Storing on memory address %d the value %d that's in the dummy register",addr_rd,data_rd);
 		end
 		
-//defparam JP = 'b00000001;
-//defparam JALR = 'b00000011;
-// BEQR	= 8'b0100_0001,
-// BNER	= 8'b0100_0010,
-// BEQI	= 8'b0100_0011,
-// BNEI	= 8'b0100_0100,
-
 	endcase
 	addressReg <= tempRA;
 	programCounter <= tempPC;

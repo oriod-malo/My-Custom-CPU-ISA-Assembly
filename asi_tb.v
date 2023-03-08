@@ -96,7 +96,7 @@ module asi_tb;
 		// SRLI
 		#100	we = 0;     i = 'b01001001000111000001101100001010;
 		#100	we = 1;
-		$display("%b\t%b,\t%b, COMMAND:\t SLLI Rs28, Rs27, K | Rd <= Rd >> K",dt1,dt2,drd); 
+		$display("%b\t%b,\t%b, COMMAND:\t SRLI Rs28, Rs27, K | Rd <= Rd >> K",dt1,dt2,drd); 
 		
 		//----------------------------------- BEQR 1 Taken
 		#100	we = 0;     i = 'b01000001_00011101_00011110_00001010;
