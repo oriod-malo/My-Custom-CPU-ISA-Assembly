@@ -3,16 +3,17 @@
 ## Description
 
 After getting familiar with VHDL/Verilog and CPU systems I wanted to design my own CPU Core / Instruction Set Architecture capable of "running" its own assembly code.<br>
-I took inspiration from the ALU implementations in Verilog in order to make something bigger, capable of executing the most common Assembly commands.<br>
+I took inspiration from the ALU which functions with operands and opcodes and wanted to make something bigger, capable of executing the most common Assembly commands (given as an instruction vector).<br>
 This includes 3 Logical Operations, And Or and Xor, 3 arithmetic ones Add, Subtract, Multiply, Branch if Equal and If Not equal for both between register and register as well as register content & immediate. <br>
 With exception of this it can also handle the shifting of register content left or right as well as Jump/Jump-and-Link, Load and Store between Memory and a Single dummy register.<br>
 
 ## Notes
+* Includes logical instructions (AND, OR, XOR), Arithmetic (ADD, SUBtract and MultiPLy), Branch if EQual(BEQI/R) or if Not Equal(BNER/I), Jump, Jump-and-Link, Load, Store.
 * Most instructions have "two versions". For example, ADDR sums the contents of two registers and saves that to a third one. ADDI sums the content of a register and an immediate and saves that to the same address.
 * While most ISAs deal in few standard source registers and access the memory with Load and Store operations, I wanted my architecture to be easier to view/simulate (since it's my first one) thus it has only 1 dummy register and everything else is done directly in the test memory.
-* In order to simulate the functionality of Load and Store commands i added a dummy register.
-* The Address Register is added to enable the Jump-and-Link type of commands.
+* In order to simulate the functionality of Load and Store commands i added a dummy register. The Address Register is added to enable the Jump-and-Link type of commands.
 * I have made extensive use of "$display" command to monitor the testbench and preview how things might look if such instructions were interpreted in usable Assembly given a concrete interpreting unit. Sometimes in bits sometimes in words it's made on-purpose like that to better visualize both machine/binary language and possible Assembly syntax.
+* The Program Counter (PC) normally is incremented after each instruction by 1 unit (usually by 4 because 4 bytes = 32 bits in most machines), but here it has been left static on purpose: to make visible the correct functioning of branch and jump instructions is easier with a static program counter.
 
 ## Simulation Guide (in ModelSim)
 1. When simulating the project, choose to simulate "asi_tb.v"
