@@ -12,7 +12,7 @@ With exception of this it can also handle the shifting of register content left 
 * While most ISAs deal in few standard source registers and access the memory with Load and Store operations, I wanted my architecture to be easier to view/simulate (since it's my first one) thus it has only 1 dummy register and everything else is done directly in the test memory.
 * In order to simulate the functionality of Load and Store commands i added a dummy register.
 * The Address Register is added to enable the Jump-and-Link type of commands.
-* I have made extensive use of "$display" command to monitor the testbench and preview how things might look if such instructions were interpreted in usable Assembly given a concrete interpreting unit.
+* I have made extensive use of "$display" command to monitor the testbench and preview how things might look if such instructions were interpreted in usable Assembly given a concrete interpreting unit. Sometimes in bits sometimes in words it's made on-purpose like that.
 
 ## Simulation Guide (in ModelSim)
 1. When simulating the project, choose to simulate "asi_tb.v"
