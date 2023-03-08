@@ -1,4 +1,4 @@
-# My-Custom-CPU / ISA / Assembly Language
+# My-Custom-CPU / ISA
 
 ## Description
 
