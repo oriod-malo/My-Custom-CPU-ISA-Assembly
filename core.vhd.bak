@@ -1,0 +1,121 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all; 
+use IEEE.numeric_std.ALL;
+-- use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity core is
+	generic(
+				--Integer Constants
+				width_instruction	: integer := 32;
+				width_opcode		: integer := 8;
+				width_data			: integer := 32;
+				width_address		: integer := 8;
+				
+				-- Fixed Register Addresses
+				pc_address		:		std_logic_vector(7 downto 0) := "00000000";
+				ra_address		:		std_logic_vector(7 downto 0) := "11111111";
+				base_address	:		std_logic_vector(7 downto 0) := "00000001";
+				
+				--  Type R Instructions 
+				ANDR	:		std_logic_vector(7 downto 0) := "00000101";
+				ORR		:		std_logic_vector(7 downto 0) := "00000110";
+				XORR	:		std_logic_vector(7 downto 0) := "00000111";
+				ADDR	:		std_logic_vector(7 downto 0) := "00001000";
+				SUBR	:		std_logic_vector(7 downto 0) := "00001001";
+				MPLR	:		std_logic_vector(7 downto 0) := "00001010";
+				DIVR	:		std_logic_vector(7 downto 0) := "00001011";
+
+				
+				--Jump instruction opcodes
+				JPR	:		std_logic_vector(7 downto 0) := "00000001";
+				JPI	:		std_logic_vector(7 downto 0) := "00000010";
+				JALR	:		std_logic_vector(7 downto 0) := "00000011";
+				JALI	:		std_logic_vector(7 downto 0) := "00000100"
+
+				);
+				
+	port(
+			--inputs
+			clk			: 	in std_logic;
+			reset			:	in std_logic;
+			instruction	:	in	std_logic_vector(width_instruction-1 downto 0);
+			data_rs1		:	in	std_logic_vector(width_data-1 downto 0);
+			data_rs2		:	in	std_logic_vector(width_data-1 downto 0);
+			--outputs
+			addr_rs1		:	out std_logic_vector(width_address-1 downto 0);
+			addr_rs2		:	out std_logic_vector(width_address-1 downto 0);
+			addr_rd		:	out std_logic_vector(width_address-1 downto 0);
+			data_rd		:	out std_logic_vector(width_data-1 downto 0)
+			);
+			
+end core;
+
+architecture behavioral of core is
+-- signal declarations
+	signal CurrentAddress, NextAddress : std_logic_vector(width_address-1 downto 0);
+	signal opcode : std_logic_vector(width_opcode-1 downto 0);
+--	signal temp_val : integer;
+-- signal end
+begin
+		comb_proc : process(reset, instruction, CurrentAddress, NextAddress, data_rs1, data_rs2)
+		begin
+		opcode <= instruction(width_instruction-1 downto width_instruction - width_opcode);
+		
+		case(instruction(31 downto 24)) is
+		-- R-type instructions: |OPCODE|RD|RS1|RS2|
+			when "00000101" =>
+				addr_rd <= instruction(23 downto 16);
+				addr_rs1 <= instruction(15 downto 8);
+				addr_rs2 <= instruction(7 downto 0);
+				
+				data_rd <= data_rs1 and data_rs2;
+				
+			when "00000110" =>
+				addr_rd <= instruction(23 downto 16);
+				addr_rs1 <= instruction(15 downto 8);
+				addr_rs2 <= instruction(7 downto 0);
+				
+				data_rd <= data_rs1 or data_rs2;
+				
+			when "00000111" =>
+				addr_rd <= instruction(23 downto 16);
+				addr_rs1 <= instruction(15 downto 8);
+				addr_rs2 <= instruction(7 downto 0);
+				
+				data_rd <= data_rs1 xor data_rs2;
+
+			when "00001000" =>
+				addr_rd <= instruction(23 downto 16);
+				addr_rs1 <= instruction(15 downto 8);
+				addr_rs2 <= instruction(7 downto 0);
+				
+				data_rd <= std_logic_vector(to_unsigned((to_integer(unsigned(data_rs1)) + to_integer(unsigned(data_rs2))),32)) ;
+				
+			when "00001001" =>
+				addr_rd <= instruction(23 downto 16);
+				addr_rs1 <= instruction(15 downto 8);
+				addr_rs2 <= instruction(7 downto 0);
+				
+				
+				data_rd <= std_logic_vector(to_unsigned((to_integer(unsigned(data_rs1)) - to_integer(unsigned(data_rs2))),32)) ;
+				
+			when "00001010" =>
+				addr_rd <= instruction(23 downto 16);
+				addr_rs1 <= instruction(15 downto 8);
+				addr_rs2 <= instruction(7 downto 0);
+				
+				data_rd <= std_logic_vector(to_unsigned((to_integer(unsigned(data_rs1)) * to_integer(unsigned(data_rs2))),32)) ;
+
+			when others =>
+				NextAddress <= "00000000";							-- value 0 in 10 downto 0 (11 elements)
+		end case;
+
+		end process comb_proc;
+
+		clk_proc : process (clk,reset,instruction,CurrentAddress,NextAddress) 
+		begin
+			if (reset = '1') then	CurrentAddress <= base_address;
+			elsif(rising_edge(clk)) then	CurrentAddress <= NextAddress;
+			end if;
+		end process clk_proc;
+end behavioral;

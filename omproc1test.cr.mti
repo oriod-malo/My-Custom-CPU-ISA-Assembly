@@ -1,0 +1,29 @@
+C:/SimTest/OMPROC1/asi.v {1 {vlog -work work -stats=none C:/SimTest/OMPROC1/asi.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module asi
+
+Top level modules:
+	asi
+
+} {} {}} C:/SimTest/OMPROC1/core.v {1 {vlog -work work -stats=none C:/SimTest/OMPROC1/core.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module core
+
+Top level modules:
+	core
+
+} {} {}} C:/SimTest/OMPROC1/asi_tb.v {1 {vlog -work work -stats=none C:/SimTest/OMPROC1/asi_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module asi_tb
+
+Top level modules:
+	asi_tb
+
+} {} {}} C:/SimTest/OMPROC1/true_dpram_sclk.v {1 {vlog -work work -stats=none C:/SimTest/OMPROC1/true_dpram_sclk.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module true_dpram_sclk
+
+Top level modules:
+	true_dpram_sclk
+
+} {} {}}

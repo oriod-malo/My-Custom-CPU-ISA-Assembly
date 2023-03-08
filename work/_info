@@ -1,0 +1,115 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/16.1
+vasi
+Z0 !s110 1678296547
+!i10b 1
+!s100 gP:Z8R?c2j0X;:?@mz:HZ0
+IIRa8OOAkGh?KHMRY_0_@W0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/SimTest/OMPROC1
+w1678276478
+8C:/SimTest/OMPROC1/asi.v
+FC:/SimTest/OMPROC1/asi.v
+Z3 L0 20
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z5 !s108 1678296547.000000
+!s107 C:/SimTest/OMPROC1/asi.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/SimTest/OMPROC1/asi.v|
+!i113 1
+Z6 o-work work
+Z7 tCvgOpt 0
+vasi_tb
+R0
+!i10b 1
+!s100 WcP^eJCk^C>REiHQ5>gzW1
+I5DZFlje_[kJC8B[V]T9VR3
+R1
+R2
+w1678296543
+8C:/SimTest/OMPROC1/asi_tb.v
+FC:/SimTest/OMPROC1/asi_tb.v
+L0 5
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/SimTest/OMPROC1/asi_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/SimTest/OMPROC1/asi_tb.v|
+!i113 1
+R6
+R7
+vcore
+R0
+!i10b 1
+!s100 MNhzV5bHhfW:R08g?a2=<2
+I<>8797`:FEF3A]53LiA8Z3
+R1
+R2
+w1678296512
+8C:/SimTest/OMPROC1/core.v
+FC:/SimTest/OMPROC1/core.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/SimTest/OMPROC1/core.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/SimTest/OMPROC1/core.v|
+!i113 1
+R6
+R7
+vomproc1
+!s110 1678020055
+!i10b 1
+!s100 [`igjBVTZJ>@=UI8AjG1[3
+IBQAlY8Ei3M_HA_F7VGc;z3
+R1
+R2
+w1678018359
+8C:\SimTest\OMPROC1\omproc1.v
+FC:\SimTest\OMPROC1\omproc1.v
+R3
+R4
+r1
+!s85 0
+31
+!s108 1678020054.000000
+!s107 C:\SimTest\OMPROC1\omproc1.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\SimTest\OMPROC1\omproc1.v|
+!i113 1
+R6
+R7
+vtrue_dpram_sclk
+R0
+!i10b 1
+!s100 FaU2hZbR^1PHgZRlOg19U0
+I4]<`cO^OmA>iDJB<a>3631
+R1
+R2
+w1677844901
+8C:/SimTest/OMPROC1/true_dpram_sclk.v
+FC:/SimTest/OMPROC1/true_dpram_sclk.v
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/SimTest/OMPROC1/true_dpram_sclk.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/SimTest/OMPROC1/true_dpram_sclk.v|
+!i113 1
+R6
+R7
